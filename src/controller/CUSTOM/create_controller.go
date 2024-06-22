@@ -6,12 +6,12 @@ import (
 	"backend-site/src/controller/model/request"
 	"backend-site/src/model"
 	"backend-site/src/view"
-	"github.com/gin-gonic/gin"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
 func (siteController *siteControllerInterface) Create(c *gin.Context) {
-
 	var siteRequest request.SiteRequest
 
 	if err := c.ShouldBindJSON(&siteRequest); err != nil {
