@@ -1,29 +1,24 @@
-package controller
+package custom
 
 import (
-	"backend-site/src/config/logger"
-	"backend-site/src/config/validation"
-	"backend-site/src/controller/model/request"
-	"backend-site/src/model"
-	"backend-site/src/view"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
 
-func (siteController *siteControllerInterface) Create(c *gin.Context) {
-	var siteRequest request.SiteRequest
+func (customController *customControllerInterface) Create(c *gin.Context) {
+	var customRequest request.customRequest
 
-	if err := c.ShouldBindJSON(&siteRequest); err != nil {
-		errRest := validation.ValidateSiteError(err)
-		logger.Error("Erro ao validar site", errRest)
+	if err := c.ShouldBindJSON(&customRequest); err != nil {
+		errRest := validation.ValidatecustomError(err)
+		logger.Error("Erro ao validar custom", errRest)
 		c.JSON(errRest.Code, errRest)
 		return
 	}
 
-	domain := model.NewSiteDomain(siteRequest.Title, "", "", "", "")
+	domain := model.NewcustomDomain(customRequest.Title, "", "", "", "")
 
-	result, err := siteController.service.Create(domain)
+	result, err := customController.service.Create(domain)
 	if err != nil {
 		c.JSON(err.Code, err)
 		logger.Error("Erro ao chamar o create ", err)
