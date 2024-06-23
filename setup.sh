@@ -48,5 +48,5 @@ rename_files_and_directories
 # Substituir ocorrências dentro dos arquivos
 replace_within_files
 
-echo "Configuração concluída com sucesso!"
+echo "Configuração concluída com sucesso! "
 
