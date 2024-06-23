@@ -1,9 +1,10 @@
 package dao
 
-
 type CustomDAO interface {
-	Create(customDomain domain.CusomDomainInterface) (domain.CusomDomainInterface, *rest_err.RestErr)
-	FindByID(id string) (domain.CusomDomainInterface, *rest_err.RestErr)
+	Create(
+		customDomain domain.CustomDomainInterface,
+	) (domain.CustomDomainInterface, *rest_err.RestErr)
+	FindByID(id string) (domain.CustomDomainInterface, *rest_err.RestErr)
 }
 
 type customDAO struct {
@@ -13,6 +14,3 @@ type customDAO struct {
 func NewCustomDAO(database *gorm.DB) CustomDAO {
 	return &customDAO{database}
 }
-
-
-
