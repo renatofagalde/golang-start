@@ -1,13 +1,19 @@
 package custom
 
 import (
+	"main/config/validation"
+	"main/src/controller/custom/model"
+	"main/src/view"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	toolkit "github.com/renatofagalde/golang-toolkit"
 )
 
 func (customController *customControllerInterface) Create(c *gin.Context) {
-	var customRequest request.customRequest
+	var logger toolkit.Logger
+	var restErr toolkit.RestErr
+	var customRequest model.CustomRequest
 
 	if err := c.ShouldBindJSON(&customRequest); err != nil {
 		errRest := validation.ValidatecustomError(err)
@@ -16,15 +22,14 @@ func (customController *customControllerInterface) Create(c *gin.Context) {
 		return
 	}
 
-	domain := model.NewcustomDomain(customRequest.Title, "", "", "", "")
+	domain := model.NewCustomDomain(nil, request.Custom, request.fullName, request.email)
 
 	result, err := customController.service.Create(domain)
 	if err != nil {
-		c.JSON(err.Code, err)
-		logger.Error("Erro ao chamar o create ", err)
+		errorMessage := restErr.NewBadRequestError("Erro ao salvar")
+		c.JSON(errorMessage.Code, errorMessage)
 		return
 	}
-	logger.Info("init create userController")
 
 	c.JSON(http.StatusOK, view.ConvertDomainToResponse(result))
 }

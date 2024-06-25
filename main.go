@@ -3,20 +3,19 @@ package main
 import (
 	"context"
 	"fmt"
+	"log"
+	postgres "main/src/config/database/postgres/gorm"
+	"main/src/controller/route"
+
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	toolkit "github.com/renatofagalde/golang-toolkit"
-	"log"
-	postgres "main/src/config/database/postgres/gorm"
-	"main/src/controller/routes"
 )
 
 func init() {
-
 }
 
 func main() {
-
 	var tools toolkit.Tools
 	var logger toolkit.Logger
 	config, err := tools.LoadConfig(".")
@@ -34,9 +33,9 @@ func main() {
 
 	userController := initDependencies(database)
 	gin.SetMode(gin.ReleaseMode)
-	router := gin.Default()
-	router.Use(cors.Default())
-	routes.InitRoutes(&router.RouterGroup, userController)
+	route := gin.Default()
+	route.Use(cors.Default())
+	route.InitRoutes(&router.RouterGroup, userController)
 	if err := router.Run(":8080"); err != nil {
 		log.Fatal(err)
 	}

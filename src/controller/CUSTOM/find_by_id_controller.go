@@ -1,12 +1,19 @@
-package controller
+package custom
 
 import (
 	"encoding/json"
 	"fmt"
+	"main/src/view"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
+	toolkit "github.com/renatofagalde/golang-toolkit"
+	"go.uber.org/zap"
 )
 
 func (customController *customControllerInterface) FindById(c *gin.Context) {
+	var logger toolkit.Logger
+
 	logger.Info("controller.FindById", zap.String("journey", "findByID"))
 	id := c.Param("id")
 	out, _ := json.Marshal(c)
