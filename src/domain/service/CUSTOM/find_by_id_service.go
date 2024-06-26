@@ -1,12 +1,12 @@
 package custom
 
 import (
-	"main/src/domain/service"
+	"main/src/domain"
 
 	toolkit "github.com/renatofagalde/golang-toolkit"
 )
 
-func (cd *customDomainService) FindByIDService(
+func (cd *customDomainInterface) FindByID(
 	id string,
 ) (domain.customDomainInterface, *toolkit.RestErr) {
 	logger.Info("init FindcustomByIDService ")

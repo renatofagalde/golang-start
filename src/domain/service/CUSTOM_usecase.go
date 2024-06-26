@@ -1,4 +1,4 @@
-package service
+package custom
 
 import (
 	"main/src/domain"
@@ -7,14 +7,15 @@ import (
 	toolkit "github.com/renatofagalde/golang-toolkit"
 )
 
-func NewCustomDomainService(customDAO custom.customDAO) customDomainService {
+func NewCustomDomainService(customDAO custom.customDAO) CustomDomainService {
 	return &customDomainService{customRepository}
 }
 
 type customDomainService struct {
-	customDAO custom.customDAO
+	dao custom.customDAO
 }
-type customDomainService interface {
-	CreateService(domain.customDomainInterface) (domain.customDomainInterface, *toolkit.RestErr)
-	FindByIDService(id string) (domain.customDomainInterface, *toolkit.RestErr)
+
+type CustomDomainService interface {
+	Create(domain.customDomainInterface) (domain.customDomainInterface, *toolkit.RestErr)
+	FindByID(string) (domain.customDomainInterface, *toolkit.RestErr)
 }

@@ -1,7 +1,7 @@
 package custom
 
 import (
-	"main/config/validation"
+	"main/src/config/validation"
 	"main/src/controller/custom/model"
 	"main/src/view"
 	"net/http"

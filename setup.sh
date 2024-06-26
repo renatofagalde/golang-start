@@ -45,6 +45,10 @@ replace_within_files() {
         sed -i "s/\bCustom\([A-Z]\)/$DOMAIN_CAPITALIZED\1/g" "$file"
         sed -i "s/\bcustom\([A-Z]\)/$DOMAIN_LOWER\1/g" "$file"
 
+        # Substituir ocorrências que tenham letras antes e depois
+        sed -i "s/\([a-zA-Z]\)Custom\([a-zA-Z]\)/\1$DOMAIN_CAPITALIZED\2/g" "$file"
+        sed -i "s/\([a-zA-Z]\)custom\([a-zA-Z]\)/\1$DOMAIN_LOWER\2/g" "$file"
+
         # Substituir rotas
         sed -i "s|/customs\b|/${DOMAIN_LOWER}s|g" "$file"
         sed -i "s|/custom\b|/$DOMAIN_LOWER|g" "$file"
@@ -70,3 +74,4 @@ go mod tidy
 go test -v -cover ./...
 
 echo "Configuração concluída com sucesso!"
+

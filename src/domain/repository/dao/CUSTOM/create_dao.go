@@ -1,21 +1,28 @@
-package repository
+package custom
 
 import (
-	"backend-custom/src/config/logger"
-	"backend-custom/src/config/rest_err"
-	"backend-custom/src/model"
-	"backend-custom/src/model/repository/entity"
-	"backend-custom/src/model/repository/entity/converter"
 	"fmt"
+	"main/src/domain"
+	"main/src/domain/repository/dao"
+	"main/src/domain/repository/entity"
+
+	toolkit "github.com/renatofagalde/golang-toolkit"
 	"go.uber.org/zap"
 )
 
-func (sr *customRepository) Create(customDomain model.customDomainInterface) (model.customDomainInterface, *rest_err.RestErr) {
+func (customRepository *dao.customDAO) Create(
+	customDomain domain.CustomDomainInterface,
+) (domain.CustomDomainInterface, *toolkit.RestErr) {
 	logger.Info("init create custom repository", zap.String("journey", "create"))
 
-	toSave := &entity.customEntity{Title: customDomain.GetTitle()}
+	toSave := &entity.customEntity{
+		ID:       1,
+		Custom:   customDomain.Custom(),
+		FullName: customDomain.FullName(),
+		Email:    customDomain.GetEmail(),
+	}
 
-	sr.databaseConnection.Create(&toSave)
+	customRepository.databaseConnection.Create(&toSave)
 
 	logger.Info(fmt.Sprintf("custom entity object %+v", toSave))
 	return converter.ConvertEntityToDomain(*toSave), nil
