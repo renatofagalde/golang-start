@@ -1,14 +1,15 @@
 package validation
 
 import (
-	"backend-site/src/config/rest_err"
 	"encoding/json"
 	"errors"
+
 	"github.com/gin-gonic/gin/binding"
 	en "github.com/go-playground/locales/en"
 	ut "github.com/go-playground/universal-translator"
 	"github.com/go-playground/validator/v10"
 	en_translation "github.com/go-playground/validator/v10/translations/en"
+	toolkit "github.com/renatofagalde/golang-toolkit"
 )
 
 var (
@@ -25,25 +26,25 @@ func init() {
 	}
 }
 
-func ValidateSiteError(validation_err error) *rest_err.RestErr {
+func ValidateSiteError(validation_err error) *toolkit.RestErr {
 	var jsonErr *json.UnmarshalTypeError
 	var jsonValidationError validator.ValidationErrors
+	var restErr toolkit.RestErr
 
 	if errors.As(validation_err, &jsonErr) {
-		return rest_err.NewBadRequestError("Invalid field type") //json enviando errado
+		return restErr.NewBadRequestError("Invalid field type") // json enviando errado
 	} else if errors.As(validation_err, &jsonValidationError) {
-		errorsCauses := []rest_err.Cause{}
+		errorsCauses := []restErr.Cause{}
 
 		for _, e := range validation_err.(validator.ValidationErrors) {
-			cause := rest_err.Cause{
+			cause := restErr.Cause{
 				Message: e.Translate(transl),
 				Field:   e.Field(),
 			}
 			errorsCauses = append(errorsCauses, cause)
 		}
-		return rest_err.NewBadRequestValidationError("Some fields are invalid", errorsCauses)
+		return restErr.NewBadRequestValidationError("Some fields are invalid", errorsCauses)
 	} else {
-		return rest_err.NewBadRequestError("Error trying to convert fields")
+		return restErr.NewBadRequestError("Error trying to convert fields")
 	}
-
 }

@@ -1,14 +1,15 @@
 package main
 
 import (
+	"main/src/controller/custom"
+	"main/src/domain/repository/dao"
+	"main/src/domain/service"
+
 	"gorm.io/gorm"
-	"main/src/controller/user"
-	"main/src/model/repository"
-	"main/src/model/service"
 )
 
 func initDependencies(database *gorm.DB) controller.UserControllerInterface {
-	r := repository.NewUerRepository(database)
-	domainService := service.NewUserDomainService(r)
+	r := dao.NewCustomDAO(database)
+	domainService := service.NewCustomDomainService(r)
 	return controller.NewControllerInterface(domainService)
 }

@@ -1,7 +1,7 @@
 package custom
 
 import (
-	"main/domain/service"
+	"main/src/domain/service"
 
 	toolkit "github.com/renatofagalde/golang-toolkit"
 )

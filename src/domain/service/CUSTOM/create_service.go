@@ -1,7 +1,7 @@
 package custom
 
 import (
-	"main/domain/service"
+	"main/src/domain"
   toolkit "github.com/renatofagalde/golang-toolkit"
 )
 func(cd *customDomainInterface)	CreateService(customDomain domain.customDomainInterface) (domain.customDomainInterface, *toolkit.RestErr)
