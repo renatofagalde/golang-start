@@ -37,13 +37,13 @@ rename_files_and_directories() {
 replace_within_files() {
     find . -type f -not -name "setup.sh" -print0 | while IFS= read -r -d '' file; do
         # Substituir CUSTOM, Custom, custom respeitando a capitalização
-#        sed -i "s/\bCUSTOM\b/$DOMAIN/g" "$file"
-#        sed -i "s/\bCustom\b/$DOMAIN_CAPITALIZED/g" "$file"
-#        sed -i "s/\bcustom\b/$DOMAIN_LOWER/g" "$file"
+        sed -i "s/\bCUSTOM\b/$DOMAIN/g" "$file"
+        sed -i "s/\bCustom\b/$DOMAIN_CAPITALIZED/g" "$file"
+        sed -i "s/\bcustom\b/$DOMAIN_LOWER/g" "$file"
 
         # Substituir ocorrências em camelCase e PascalCase respeitando a capitalização
-        sed -i "s/Custom\([A-Z]\)/$DOMAIN_CAPITALIZED\1/g" "$file"
-        sed -i "s/custom\([A-Z]\)/$DOMAIN_LOWER\1/g" "$file"
+        sed -i "s/\bCustom\([A-Z]\)/$DOMAIN_CAPITALIZED\1/g" "$file"
+        sed -i "s/\bcustom\([A-Z]\)/$DOMAIN_LOWER\1/g" "$file"
 
         # Substituir rotas
         sed -i "s|/customs\b|/${DOMAIN_LOWER}s|g" "$file"
@@ -70,4 +70,3 @@ go mod tidy
 go test -v -cover ./...
 
 echo "Configuração concluída com sucesso!"
-
