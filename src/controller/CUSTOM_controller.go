@@ -1,5 +1,10 @@
 package controller
 
+import (
+	"main/src/domain/service/custom"
+
+	"github.com/gin-gonic/gin"
+)
 
 type CustomControllerInterface interface {
 	Create(c *gin.Context)
@@ -7,11 +12,11 @@ type CustomControllerInterface interface {
 }
 
 type customControllerInterface struct {
-	service service.CustomDomainService
+	service custom.CustomDomainService
 }
 
 func NewCustomControllerInterface(
-	serviceInterface service.CustomDomainService,
+	serviceInterface custom.CustomDomainService
 ) CustomControllerInterface {
 	return &customControllerInterface{service: serviceInterface}
 }

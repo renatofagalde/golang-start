@@ -8,9 +8,7 @@ import (
 )
 
 type CustomDAO interface {
-	Create(
-		customDomain domain.CustomDomainInterface,
-	) (domain.CustomDomainInterface, *toolkit.RestErr)
+	Create(customDomain domain.CustomDomainInterface) (domain.CustomDomainInterface, *toolkit.RestErr)
 	FindByID(id string) (domain.CustomDomainInterface, *toolkit.RestErr)
 }
 

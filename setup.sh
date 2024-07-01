@@ -70,6 +70,8 @@ replace_within_files
 go mod init main
 # Baixar dependências do módulo Go
 go mod tidy
+
+go build .
 # Executar testes com cobertura
 go test -v -cover ./...
 

@@ -34,10 +34,10 @@ func ValidateSiteError(validation_err error) *toolkit.RestErr {
 	if errors.As(validation_err, &jsonErr) {
 		return restErr.NewBadRequestError("Invalid field type") // json enviando errado
 	} else if errors.As(validation_err, &jsonValidationError) {
-		errorsCauses := []restErr.Cause{}
+		errorsCauses := []toolkit.Cause{}
 
 		for _, e := range validation_err.(validator.ValidationErrors) {
-			cause := restErr.Cause{
+			cause := toolkit.Cause{
 				Message: e.Translate(transl),
 				Field:   e.Field(),
 			}

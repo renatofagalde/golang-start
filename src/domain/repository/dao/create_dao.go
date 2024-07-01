@@ -1,22 +1,22 @@
-package custom
+package dao
 
 import (
 	"fmt"
 	"main/src/domain"
-	"main/src/domain/repository/dao"
-	"main/src/domain/repository/entity"
+	"main/src/domain/repository/entity/custom/convert"
+  "main/src/domain/repository/entity/custom"
+
 
 	toolkit "github.com/renatofagalde/golang-toolkit"
 	"go.uber.org/zap"
 )
 
-func (customRepository *dao.customDAO) Create(
-	customDomain domain.CustomDomainInterface,
-) (domain.CustomDomainInterface, *toolkit.RestErr) {
+func (customRepository *customDAO) Create(customDomain domain.CustomDomainInterface) (domain.CustomDomainInterface, *toolkit.RestErr) {
+	var logger toolkit.Logger
 	logger.Info("init create custom repository", zap.String("journey", "create"))
 
-	toSave := &entity.customEntity{
-		ID:       1,
+	toSave := &custom.CustomEntity{
+		ID:       "1",
 		Custom:   customDomain.Custom(),
 		FullName: customDomain.FullName(),
 		Email:    customDomain.GetEmail(),

@@ -3,14 +3,15 @@ package custom
 import (
 	"main/src/config/validation"
 	"main/src/controller/custom/model"
-	"main/src/view"
+	"main/src/view/convert"
+  "main/src/controller"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 	toolkit "github.com/renatofagalde/golang-toolkit"
 )
 
-func (customController *customControllerInterface) Create(c *gin.Context) {
+func (customController *controller.customControllerInterface) Create(c *gin.Context) {
 	var logger toolkit.Logger
 	var restErr toolkit.RestErr
 	var customRequest model.CustomRequest
@@ -31,5 +32,5 @@ func (customController *customControllerInterface) Create(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, view.ConvertDomainToResponse(result))
+	c.JSON(http.StatusOK, convert.ConvertDomainToResponse(result))
 }

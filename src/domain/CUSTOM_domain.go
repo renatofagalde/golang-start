@@ -1,13 +1,13 @@
 package domain
 
 type customDomain struct {
-	id                      uint
-	custom                   string
-	fullName             string
-	email       string
+	id       string
+	custom   string
+	fullName string
+	email    string
 }
 
-func (cd *customDomain) GetID() uint {
+func (cd *customDomain) GetID() string {
 	return cd.id
 }
 
