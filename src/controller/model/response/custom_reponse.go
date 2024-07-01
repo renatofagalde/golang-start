@@ -1,4 +1,4 @@
-package model
+package response
 
 type CustomResponse struct {
 	ID       string `json:id`

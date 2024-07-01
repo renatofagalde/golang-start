@@ -2,7 +2,6 @@ package route
 
 import (
 	"main/src/controller"
-
 	"github.com/gin-gonic/gin"
 )
 

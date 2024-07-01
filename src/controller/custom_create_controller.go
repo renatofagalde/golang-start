@@ -1,8 +1,8 @@
-package custom
+package controller 
 
 import (
 	"main/src/config/validation"
-	"main/src/controller/custom/model"
+	"main/src/controller/model/request"
 	"main/src/view/convert"
   "main/src/controller"
 	"net/http"
@@ -14,7 +14,7 @@ import (
 func (customController *controller.customControllerInterface) Create(c *gin.Context) {
 	var logger toolkit.Logger
 	var restErr toolkit.RestErr
-	var customRequest model.CustomRequest
+	var customRequest request.CustomRequest
 
 	if err := c.ShouldBindJSON(&customRequest); err != nil {
 		errRest := validation.ValidatecustomError(err)
@@ -23,7 +23,7 @@ func (customController *controller.customControllerInterface) Create(c *gin.Cont
 		return
 	}
 
-	domain := model.NewCustomDomain(nil, request.Custom, request.fullName, request.email)
+	domain := model.NewCustomDomain(nil, customRequest.Custom, customRequest.fullName, customRequest.email)
 
 	result, err := customController.service.Create(domain)
 	if err != nil {

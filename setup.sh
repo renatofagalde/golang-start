@@ -21,25 +21,24 @@ DOMAIN_CAPITALIZED=$(echo "$DOMAIN_LOWER" | sed 's/.*/\u&/')
 
 # Função para renomear arquivos e diretórios
 rename_files_and_directories() {
-    find . -name '*CUSTOM*' | while read -r file; do
-        newfile=$(echo "$file" | sed "s/CUSTOM/$DOMAIN_LOWER/g")
+    find . -type f -name '*custom*' | while read -r file; do
+        newfile=$(echo "$file" | sed "s/custom/$DOMAIN_LOWER/g")
         mv "$file" "$newfile"
     done
 
-    # Renomear novamente para capturar subdiretórios e arquivos já renomeados
-    find . -name '*CUSTOM*' | while read -r file; do
-        newfile=$(echo "$file" | sed "s/CUSTOM/$DOMAIN_LOWER/g")
-        mv "$file" "$newfile"
+    find . -type d -name '*custom*' | while read -r dir; do
+        newdir=$(echo "$dir" | sed "s/custom/$DOMAIN_LOWER/g")
+        mv "$dir" "$newdir"
     done
 }
 
 # Função para substituir ocorrências dentro dos arquivos
 replace_within_files() {
     find . -type f -not -name "setup.sh" -print0 | while IFS= read -r -d '' file; do
-        # Substituir CUSTOM, Custom, custom respeitando a capitalização
-        sed -i "s/\bCUSTOM\b/$DOMAIN/g" "$file"
-        sed -i "s/\bCustom\b/$DOMAIN_CAPITALIZED/g" "$file"
+        # Substituir custom, Custom, CUSTOM respeitando a capitalização
         sed -i "s/\bcustom\b/$DOMAIN_LOWER/g" "$file"
+        sed -i "s/\bCustom\b/$DOMAIN_CAPITALIZED/g" "$file"
+        sed -i "s/\bCUSTOM\b/$DOMAIN/g" "$file"
 
         # Substituir ocorrências em camelCase e PascalCase respeitando a capitalização
         sed -i "s/\bCustom\([A-Z]\)/$DOMAIN_CAPITALIZED\1/g" "$file"
@@ -52,11 +51,6 @@ replace_within_files() {
         # Substituir rotas
         sed -i "s|/customs\b|/${DOMAIN_LOWER}s|g" "$file"
         sed -i "s|/custom\b|/$DOMAIN_LOWER|g" "$file"
-
-        # Substituir todas as ocorrências de custom, Custom, CUSTOM independentemente do contexto
-        sed -i "s/custom/$DOMAIN_LOWER/gI" "$file"
-        sed -i "s/Custom/$DOMAIN_CAPITALIZED/gI" "$file"
-        sed -i "s/CUSTOM/$DOMAIN/gI" "$file"
     done
 }
 
@@ -70,8 +64,6 @@ replace_within_files
 go mod init main
 # Baixar dependências do módulo Go
 go mod tidy
-
-go build .
 # Executar testes com cobertura
 go test -v -cover ./...
 

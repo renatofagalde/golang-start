@@ -1,4 +1,4 @@
-package model
+package request
 
 type CustomRequest struct {
 	Custom string `json:"custom" binding:"required,custom" example:"lorem ipsum"`
