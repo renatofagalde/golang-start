@@ -31,11 +31,12 @@ func main() {
 		fmt.Println("conexao com sucesso")
 	}
 
-	userController := initDependencies(database)
+  fmt.Println(database)
+	controller := initDependencies(database)
 	gin.SetMode(gin.ReleaseMode)
-	route := gin.Default()
-	route.Use(cors.Default())
-	route.InitRoutes(&router.RouterGroup, userController)
+	router := gin.Default()
+	router.Use(cors.Default())
+	route.InitRoutes(&router.RouterGroup, controller)
 	if err := router.Run(":8080"); err != nil {
 		log.Fatal(err)
 	}

@@ -1,15 +1,19 @@
-package custom
+package repository
 
 import (
 	"main/src/domain"
-	"main/src/domain/repository/dao"
-	"main/src/domain/repository/entity/custom"
+	"main/src/domain/repository/entity"
+	"main/src/domain/repository/entity/converter"  
+	"fmt"
+	"go.uber.org/zap"
 
 	toolkit "github.com/renatofagalde/golang-toolkit"
 )
 
-func (customRepository *dao.customDAO) FindByID(id string) (domain.customDomainInterface, *toolkit.RestErr) {
-	var customEntity custom.customEntity
+func (customRepository *customRepository) FindByID(id string) (domain.CustomDomainInterface, *toolkit.RestErr) {
+	var customEntity entity.CustomEntity
+  var logger toolkit.Logger
+  var restErr toolkit.RestErr
 
 	err := customRepository.databaseConnection.Where("tenent_id =?", id).First(&customEntity).Error
 	if err != nil {
@@ -19,7 +23,7 @@ func (customRepository *dao.customDAO) FindByID(id string) (domain.customDomainI
 			err,
 			zap.String("journey", "findByID"),
 		)
-		return nil, rest_err.NewNotFoundError(errorMessage)
+		return nil, restErr.NewNotFoundError(errorMessage)
 	}
 
 	logger.Info(

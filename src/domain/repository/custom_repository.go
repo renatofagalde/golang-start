@@ -1,4 +1,4 @@
-package dao
+package repository
 
 import (
 	"main/src/domain"
@@ -7,15 +7,15 @@ import (
 	"gorm.io/gorm"
 )
 
-type CustomDAO interface {
+type CustomRepository interface {
 	Create(customDomain domain.CustomDomainInterface) (domain.CustomDomainInterface, *toolkit.RestErr)
 	FindByID(id string) (domain.CustomDomainInterface, *toolkit.RestErr)
 }
 
-type customDAO struct {
+type customRepository struct {
 	databaseConnection *gorm.DB
 }
 
-func NewCustomDAO(database *gorm.DB) CustomDAO {
-	return &customDAO{database}
+func NewCustomRepository(database *gorm.DB) CustomRepository {
+	return &customRepository{database}
 }

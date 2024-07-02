@@ -1,11 +1,11 @@
-package convert
+package converter
 
 import (
 	"main/src/domain"
-	"main/src/domain/repository/entity/custom"
+	"main/src/domain/repository/entity"
 )
 
-func ConvertEntityToDomain(customEntity custom.CustomEntity) domain.CustomDomainInterface {
+func ConvertEntityToDomain(customEntity entity.CustomEntity) domain.CustomDomainInterface {
 	domain := domain.NewCustomDomain(
 		customEntity.ID,
 		customEntity.Custom,

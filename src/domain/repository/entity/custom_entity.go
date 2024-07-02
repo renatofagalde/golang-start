@@ -1,4 +1,4 @@
-package custom
+package entity
 
 type CustomEntity struct {
 	ID               string

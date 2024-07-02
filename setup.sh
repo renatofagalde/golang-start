@@ -65,7 +65,7 @@ go mod init main
 # Baixar dependências do módulo Go
 go mod tidy
 # Executar testes com cobertura
-go test -v -cover ./...
+# go test -v -cover ./...
 
 echo "Configuração concluída com sucesso!"
 

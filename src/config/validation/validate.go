@@ -26,7 +26,7 @@ func init() {
 	}
 }
 
-func ValidateSiteError(validation_err error) *toolkit.RestErr {
+func ValidateError(validation_err error) *toolkit.RestErr {
 	var jsonErr *json.UnmarshalTypeError
 	var jsonValidationError validator.ValidationErrors
 	var restErr toolkit.RestErr

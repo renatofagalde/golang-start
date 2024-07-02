@@ -1,17 +1,17 @@
 package controller
+
 import (
 	"encoding/json"
 	"fmt"
-	"main/src/view/convert"
+	"main/src/view"
 	"net/http"
-  "main/src/controller"
 
 	"github.com/gin-gonic/gin"
 	toolkit "github.com/renatofagalde/golang-toolkit"
 	"go.uber.org/zap"
 )
 
-func (customController *controller.customControllerInterface) FindById(c *gin.Context) {
+func (customController *customControllerInterface) FindById(c *gin.Context) {
 	var logger toolkit.Logger
 
 	logger.Info("controller.FindById", zap.String("journey", "findByID"))
@@ -28,7 +28,7 @@ func (customController *controller.customControllerInterface) FindById(c *gin.Co
 		logger.Error(message, err)
 		return
 	}
-	result := convert.ConvertDomainToResponse(customDomain)
+	result := view.ConvertDomainToResponse(customDomain)
 	logger.Info(
 		fmt.Sprintf("init FindUserByID find_controller successfuly %+v", result),
 		zap.String("journey", "findByID"),
