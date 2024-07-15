@@ -54,11 +54,21 @@ replace_within_files() {
     done
 }
 
+# Função para substituir ocorrências no arquivo docker-compose.yml
+replace_in_docker_compose() {
+    sed -i "s/\bCustom\b/$DOMAIN_CAPITALIZED/g" docker-compose.yml
+    sed -i "s/\bcustom\b/$DOMAIN_LOWER/g" docker-compose.yml
+    sed -i "s/\bCUSTOM\b/$DOMAIN/g" docker-compose.yml
+}
+
 # Renomear arquivos e diretórios
 rename_files_and_directories
 
 # Substituir ocorrências dentro dos arquivos
 replace_within_files
+
+# Substituir ocorrências no docker-compose.yml
+replace_in_docker_compose
 
 # Inicializar o módulo Go
 go mod init main
@@ -67,5 +77,8 @@ go mod tidy
 # Executar testes com cobertura
 # go test -v -cover ./...
 
-echo "Configuração concluída com sucesso!"
+# Subir o docker-compose
+docker-compose up -d
+
+echo "Configuração e execução do Docker concluídas com sucesso!"
 
