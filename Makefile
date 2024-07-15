@@ -31,4 +31,13 @@ server:
 mock:
 	mockgen -package mockdb -destination ./db/mock/store.go ./bank/db/sqlc Store
 
-.PHONEY: postgres createdb dropdb migrationup migrationdown migrationup1 migrationdown1 sqlc test server mock
+init-db:
+	docker-compose -f docker-compose-local.yaml up -d postgres
+	sleep 10
+	docker-compose -f docker-compose-local.yaml exec postgres psql -U custom_api -d CUSTOM -f /docker-entrypoint-initdb.d/init.sql
+
+up: init-db
+	docker-compose -f docker-compose-local.yaml up -d api
+
+
+.PHONEY: postgres createdb dropdb migrationup migrationdown migrationup1 migrationdown1 sqlc test server mock init-db
