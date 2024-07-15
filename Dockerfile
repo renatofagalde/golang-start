@@ -11,7 +11,7 @@ RUN go build -o main main.go \
 #FROM scratch
 FROM golang:1.22.4-alpine3.20
 WORKDIR /app
-COPY --from=builder /app/main .
+#COPY --from=builder /app/main .
 COPY --from=builder /app/migrate.linux-amd64 ./migrate
 COPY app.env ./app.env
 COPY start.sh ./start.sh

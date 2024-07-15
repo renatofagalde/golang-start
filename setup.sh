@@ -78,7 +78,7 @@ go mod tidy
 # go test -v -cover ./...
 
 # Subir o docker-compose
-docker-compose up -d
+docker compose up -d
 
 echo "Configuração e execução do Docker concluídas com sucesso!"
 
