@@ -3,7 +3,7 @@ package controller
 import (
 	"encoding/json"
 	"fmt"
-	"main/src/view"
+	"main/app/view"
 	"net/http"
 
 	"github.com/gin-gonic/gin"

@@ -1,9 +1,9 @@
 package repository
 
 import (
-	"main/src/domain"
-	"main/src/domain/repository/entity"
-	"main/src/domain/repository/entity/converter"  
+	"main/app/domain"
+	"main/app/domain/repository/entity"
+	"main/app/domain/repository/entity/converter"  
 	"fmt"
 	"go.uber.org/zap"
 

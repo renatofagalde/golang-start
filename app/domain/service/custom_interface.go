@@ -1,8 +1,8 @@
 package service
 
 import (
-	"main/src/domain"
-	"main/src/domain/repository"
+	"main/app/domain"
+	"main/app/domain/repository"
 
 	toolkit "github.com/renatofagalde/golang-toolkit"
 )

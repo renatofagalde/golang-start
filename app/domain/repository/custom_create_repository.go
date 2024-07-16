@@ -2,9 +2,9 @@ package repository
 
 import (
 	"fmt"
-	"main/src/domain"
-  "main/src/domain/repository/entity"
-  "main/src/domain/repository/entity/converter"
+	"main/app/domain"
+  "main/app/domain/repository/entity"
+  "main/app/domain/repository/entity/converter"
 	toolkit "github.com/renatofagalde/golang-toolkit"
 	"go.uber.org/zap"
 )

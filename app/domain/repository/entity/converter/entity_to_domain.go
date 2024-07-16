@@ -1,8 +1,8 @@
 package converter
 
 import (
-	"main/src/domain"
-	"main/src/domain/repository/entity"
+	"main/app/domain"
+	"main/app/domain/repository/entity"
 )
 
 func ConvertEntityToDomain(customEntity entity.CustomEntity) domain.CustomDomainInterface {

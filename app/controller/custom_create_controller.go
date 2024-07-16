@@ -1,11 +1,11 @@
 package controller 
 
 import (
-	"main/src/config/validation"
-	"main/src/controller/model/request"
-	"main/src/view"
+	"main/app/config/validation"
+	"main/app/controller/model/request"
+	"main/app/view"
 	"net/http"
-  "main/src/domain"
+  "main/app/domain"
 
 	"github.com/gin-gonic/gin"
 	toolkit "github.com/renatofagalde/golang-toolkit"

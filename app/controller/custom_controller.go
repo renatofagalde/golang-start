@@ -1,7 +1,7 @@
 package controller
 
 import (
-	"main/src/domain/service"
+	"main/app/domain/service"
 	"github.com/gin-gonic/gin"
 )
 

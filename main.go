@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 	"log"
-	postgres "main/src/config/database/postgres/gorm"
-	"main/src/controller/route"
+	postgres "main/app/config/database/postgres/gorm"
+	"main/app/controller/route"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"

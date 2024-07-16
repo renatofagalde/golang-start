@@ -54,11 +54,15 @@ replace_within_files() {
     done
 }
 
-# Função para substituir ocorrências no arquivo docker-compose.yml
-replace_in_docker_compose() {
-    sed -i "s/\bCustom\b/$DOMAIN_CAPITALIZED/g" docker-compose.yml
-    sed -i "s/\bcustom\b/$DOMAIN_LOWER/g" docker-compose.yml
-    sed -i "s/\bCUSTOM\b/$DOMAIN/g" docker-compose.yml
+# Função para substituir ocorrências nos arquivos docker-compose.yml e docker-compose-local.yaml
+replace_in_docker_compose_files() {
+    for compose_file in docker-compose.yml docker-compose-local.yaml; do
+        if [ -f "$compose_file" ]; then
+            sed -i "s/\bCustom\b/$DOMAIN_CAPITALIZED/g" "$compose_file"
+            sed -i "s/\bcustom\b/$DOMAIN_LOWER/g" "$compose_file"
+            sed -i "s/\bCUSTOM\b/$DOMAIN/g" "$compose_file"
+        fi
+    done
 }
 
 # Renomear arquivos e diretórios
@@ -67,8 +71,8 @@ rename_files_and_directories
 # Substituir ocorrências dentro dos arquivos
 replace_within_files
 
-# Substituir ocorrências no docker-compose.yml
-replace_in_docker_compose
+# Substituir ocorrências nos arquivos docker-compose.yml e docker-compose-local.yaml
+replace_in_docker_compose_files
 
 # Inicializar o módulo Go
 go mod init main
@@ -77,9 +81,8 @@ go mod tidy
 # Executar testes com cobertura
 # go test -v -cover ./...
 
-# Subir o docker-compose
-#docker compose up -d
-make init-db
+# Subir o docker-compose usando docker-compose-local.yaml
+docker compose -f docker-compose-local.yaml up -d
 
 echo "Configuração e execução do Docker concluídas com sucesso!"
 

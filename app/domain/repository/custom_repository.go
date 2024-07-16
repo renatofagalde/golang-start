@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"main/src/domain"
+	"main/app/domain"
 
 	toolkit "github.com/renatofagalde/golang-toolkit"
 	"gorm.io/gorm"

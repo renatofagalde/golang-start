@@ -1,8 +1,8 @@
 package view
 
 import (
-	"main/src/controller/model/response"
-	"main/src/domain"
+	"main/app/controller/model/response"
+	"main/app/domain"
 )
 
 func ConvertDomainToResponse(domain domain.CustomDomainInterface) response.CustomResponse {

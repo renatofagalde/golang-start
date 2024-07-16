@@ -1,9 +1,9 @@
 package main
 
 import (
-	"main/src/controller"
-	"main/src/domain/repository"
-	"main/src/domain/service"
+	"main/app/controller"
+	"main/app/domain/repository"
+	"main/app/domain/service"
 
 	"gorm.io/gorm"
 )
