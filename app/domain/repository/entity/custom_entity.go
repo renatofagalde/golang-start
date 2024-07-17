@@ -6,3 +6,7 @@ type CustomEntity struct {
 	FullName string
 	Email    string
 }
+
+func (CustomEntity) TableName() string {
+	return "custom"
+}

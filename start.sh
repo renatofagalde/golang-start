@@ -2,20 +2,13 @@
 
 set -e
 
-echo "ls /app ----"
-ls -lh /app
-echo " ----"
 source /app/app.env
+echo " ->DB_SOURCE = ${DB_SOURCE}"
+echo " ->SERVER_ADDRES = ${SERVER_ADDRESS}"
 
-echo "tail -n 1000 /app/app.env ----"
-tail -n 1000 /app/app.env
-echo $DB_SOURCE
+ls -lh /app/migration/
 
-echo "ls /app/migration ----"
-ls -lh /app/migration
-echo " ----"
-
-/app/migrate -path /app/migration -database ${DB_SOURCE} -verbose up
+/app/migrate.linux-amd64 -path /app/migration/ -database ${DB_SOURCE} -verbose up
 
 echo "start the app"
 exec "$@"

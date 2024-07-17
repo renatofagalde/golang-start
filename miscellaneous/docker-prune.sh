@@ -1,25 +1,28 @@
-# Stop all containers
-docker stop `docker ps -qa`
+#!/bin/bash
 
-# Remove all containers
-docker rm `docker ps -qa`
+# Parar todos os containers
+echo "Parando todos os containers..."
+docker stop $(docker ps -a -q)
 
-# Remove all images
-docker rmi -f `docker images -qa `
+# Remover todos os containers
+echo "Removendo todos os containers..."
+docker rm $(docker ps -a -q)
 
-# Remove all volumes
-docker volume rm $(docker volume ls -qf)
+# Remover todas as imagens
+echo "Removendo todas as imagens..."
+docker rmi $(docker images -q)
 
-# Remove all networks
-docker network rm `docker network ls -q`
+# Remover todos os volumes
+echo "Removendo todos os volumes..."
+docker volume rm $(docker volume ls -q)
 
-# Your installation should now be all fresh and clean.
+# Remover todas as networks não utilizadas
+echo "Removendo todas as networks não utilizadas..."
+docker network prune -f
 
-# The following commands should not output any items:
-# docker ps -a
-# docker images -a 
-# docker volume ls
+# Limpar espaço de disco usado por Docker
+echo "Limpando espaço de disco usado por Docker..."
+docker system prune -a -f --volumes
 
-# The following command show only show the default networks:
-# docker network ls
+echo "Limpeza completa do Docker concluída!"
 

@@ -75,14 +75,17 @@ replace_within_files
 replace_in_docker_compose_files
 
 # Inicializar o módulo Go
-go mod init main
+#go mod init main
 # Baixar dependências do módulo Go
 go mod tidy
 # Executar testes com cobertura
 # go test -v -cover ./...
 
-# Subir o docker-compose usando docker-compose-local.yaml
-docker compose -f docker-compose-local.yaml up -d
+go build -o .
 
+# Subir o docker-compose usando docker-compose-local.yaml
+docker compose -f docker-compose-local.yaml up
+
+./miscellaneous/docker-network.sh
 echo "Configuração e execução do Docker concluídas com sucesso!"
 

@@ -1,21 +1,24 @@
 package repository
 
 import (
-	"main/app/domain"
-	"main/app/domain/repository/entity"
-	"main/app/domain/repository/entity/converter"  
 	"fmt"
-	"go.uber.org/zap"
 
 	toolkit "github.com/renatofagalde/golang-toolkit"
+	"go.uber.org/zap"
+
+	"main/app/domain"
+	"main/app/domain/repository/entity"
+	"main/app/domain/repository/entity/converter"
 )
 
-func (customRepository *customRepository) FindByID(id string) (domain.CustomDomainInterface, *toolkit.RestErr) {
+func (customRepository *customRepository) FindByID(
+	id string,
+) (domain.CustomDomainInterface, *toolkit.RestErr) {
 	var customEntity entity.CustomEntity
-  var logger toolkit.Logger
-  var restErr toolkit.RestErr
+	var logger toolkit.Logger
+	var restErr toolkit.RestErr
 
-	err := customRepository.databaseConnection.Where("tenent_id =?", id).First(&customEntity).Error
+	err := customRepository.databaseConnection.Where("id =?", id).First(&customEntity).Error
 	if err != nil {
 		errorMessage := fmt.Sprintf("custom not found with this ID: %s", id)
 		logger.Error(

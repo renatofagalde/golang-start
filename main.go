@@ -4,12 +4,13 @@ import (
 	"context"
 	"fmt"
 	"log"
-	postgres "main/app/config/database/postgres/gorm"
-	"main/app/controller/route"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	toolkit "github.com/renatofagalde/golang-toolkit"
+
+	postgres "main/app/config/database/postgres/gorm"
+	"main/app/controller/route"
 )
 
 func init() {
@@ -31,13 +32,13 @@ func main() {
 		fmt.Println("conexao com sucesso")
 	}
 
-  fmt.Println(database)
+	fmt.Println(database)
 	controller := initDependencies(database)
-	gin.SetMode(gin.ReleaseMode)
+	// gin.SetMode(gin.ReleaseMode)
 	router := gin.Default()
 	router.Use(cors.Default())
 	route.InitRoutes(&router.RouterGroup, controller)
-	if err := router.Run(":8080"); err != nil {
+	if err := router.Run(config.ServerAddress); err != nil {
 		log.Fatal(err)
 	}
 	logger.Info("Iniciando")
