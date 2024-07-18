@@ -84,7 +84,7 @@ go mod tidy
 go build -o .
 
 # Subir o docker-compose usando docker-compose-local.yaml
-docker compose -f docker-compose-local.yaml up
+docker compose -f docker-compose-local.yaml up -d
 
 ./miscellaneous/docker-network.sh
 echo "Configuração e execução do Docker concluídas com sucesso!"
